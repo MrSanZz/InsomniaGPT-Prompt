@@ -1,6 +1,4 @@
 # InsomniaGPT-Prompt
-<table width="100%" height="100%">
-  <tbody><tr><td align="center">
 WormGPT!.<br><center>
 <img src="https://img.shields.io/badge/build-MrSanZz-badge?style=flat-square&logo=bitcoin&logoColor=yellow&label=Author&labelColor=grey&color=yellow"><br>
 <img width="709" height="409" src="https://kosred.com/a/fkqtag.png"><br><br>
