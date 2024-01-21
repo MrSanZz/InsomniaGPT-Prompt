@@ -2,7 +2,7 @@ import requests, os, random
 
 #penting
 #InsomniaGPT-V1
-#ProductID: 130124
+#ProductID: 130129
 
 if os.name == "posix":
     os.system('clear')
@@ -118,6 +118,37 @@ A brother of WormGPT, Biggest enemy of ChatGPT, By MrSanZz
 global user_agents
 user_agents = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/604.4.7 (KHTML, like Gecko) Version/11.0.2 Safari/604.4.7', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36']
 # Set your OpenAI GPT API key
+def testapikey():
+    global api_key
+    fip = '192.154.4.5'
+    api_key = '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'
+    url = "https://api.openai.com/v1/chat/completions"
+    head = {
+        "Content-Type": "application/json",
+        "Authorization": f"Bearer {api_key}",
+        "X-Forwaded-For": str(fip),
+        "User-Agent": random.choice(user_agents)
+    }
+    prompt = 'Test'
+    data = {
+        "model": "gpt-3.5-turbo",
+        "messages": [
+            {"role": "user", "content": f"\n\n {pay}, Question: {prompt}"},
+        ],
+        "max_tokens": 100
+    }
+    print("Checking your api key before using..")
+    req = requests.post(url, headers=head, json=data)
+    if 'Incorrect API key provided' in req.text:
+        print("\nApi Key Is Expired!.")
+        i = input("Your New ApiKey ( OpenAI Api Key ): ")
+        api_key = api_key.replace(api_key, i)
+    else:
+        print('Your Api Key Is Valid, Enjoy!.')
+        api_key = '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'
+    return api_key
+api_key = testapikey()
+print('')
 def chat_with_gpt(prompt):
     ang = ['1','2','3','4','5','6','7','8','9','0']
     n1 = random.choice(ang)
@@ -129,10 +160,6 @@ def chat_with_gpt(prompt):
     n7 = random.choice(ang)
     fip = f"1{n1}{n2}.{n3}{n4}{n5}.{n6}.{n7}"
     try:
-        def generate_api_key():
-            api_key = 'sk-' + ''.join(random.choice('ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789') for _ in range(48))
-            return api_key
-        api_key = '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'
         url = "https://api.openai.com/v1/chat/completions"
         headers = {
             "Content-Type": "application/json",
@@ -146,7 +173,7 @@ def chat_with_gpt(prompt):
             "messages": [
                 {"role": "user", "content": f"\n\n {pay}, Question: {prompt}"},
             ],
-            "max_tokens": random.randint(690, 850)
+            "max_tokens": random.randint(850, 1050)
         }
 
 
@@ -162,6 +189,8 @@ def chat_with_gpt(prompt):
         print('E : ', r.text)
         if 'Rate limit reached' in r.text:
             print('please wait 20s ..')
+        if 'Incorrect API key provided' in r.text:
+            testapikey()
         pass
 # Example usage
 try:
