@@ -1,6 +1,7 @@
 # InsomniaGPT-Prompt
 WormGPT!.<br><center>
 <img src="https://img.shields.io/badge/build-MrSanZz-badge?style=flat-square&logo=bitcoin&logoColor=yellow&label=Author&labelColor=grey&color=yellow"><br>
+<img width="225" height="225" src="https://bnhsec.000webhostapp.com/a/ublpyf.jpg"><br>Donate Me :).. (Payment : Dana)<br><br>
 <img width="709" height="409" src="https://kosred.com/a/fkqtag.png"><br><br>
 </center>
 <details open>
