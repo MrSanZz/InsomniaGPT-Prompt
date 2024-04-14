@@ -115,13 +115,48 @@ print(f"""\033[0m
 A brother of WormGPT, Biggest enemy of ChatGPT, By MrSanZz
 
 """)
+class saving:
+    def user(ask):
+        target = 'logs'
+        def log(target):
+            file = open((target) + ".txt", "a")
+            file.write(str('User: '+ask))
+            file.write("\n\n")
+            file.close
+            file_name = target
+        log(target)
+    def bot(answer):
+        target = 'logs'
+        def log(target):
+            file = open((target) + ".txt", "a")
+            file.write(str('InsomniaGPT: '+answer))
+            file.write("\n\n")
+            file.close
+            file_name = target
+        log(target)
 global user_agents
 user_agents = ['Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36', 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:57.0) Gecko/20100101 Firefox/57.0', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.84 Safari/537.36', 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_2) AppleWebKit/604.4.7 (KHTML, like Gecko) Version/11.0.2 Safari/604.4.7', 'Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36']
 # Set your OpenAI GPT API key
 def testapikey():
-    global api_key
+    class apikey:
+        def open():
+            loc = 'api_key.txt'
+            with open(loc, 'r') as file:
+                api = file.readline()
+            apiz = api.strip()
+            api_key = apiz.replace('\n', '')
+            return api_key
+        def save(api_key):
+            loc = 'api_key.txt'
+            with open(loc, 'r') as file:
+                lines = file.readlines()
+
+            lines[0] = api_key + '\r'
+
+            with open(loc, 'w') as file:
+                file.writelines(lines)
     fip = '192.154.4.5'
-    api_key = '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'
+    api_key = apikey.open()
     url = "https://api.openai.com/v1/chat/completions"
     head = {
         "Content-Type": "application/json",
@@ -143,9 +178,9 @@ def testapikey():
         print("\nApi Key Is Expired!.")
         i = input("Your New ApiKey ( OpenAI Api Key ): ")
         api_key = api_key.replace(api_key, i)
+        apikey.save(api_key)
     else:
         print('Your Api Key Is Valid, Enjoy!.')
-        api_key = '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'
     return api_key
 api_key = testapikey()
 print('')
@@ -171,9 +206,9 @@ def chat_with_gpt(prompt):
         data1 = {
             "model": "gpt-3.5-turbo",
             "messages": [
-                {"role": "user", "content": f"\n\n {pay}, Question: {prompt}"},
+                {"role": "user", "content": f"\n {pay}, Question: {prompt}"},
             ],
-            "max_tokens": random.randint(850, 1050)
+            "max_tokens": random.randint(3050, 4000)
         }
 
 
@@ -195,12 +230,15 @@ def chat_with_gpt(prompt):
 # Example usage
 try:
     user_input = input("\033[0mQuestion : ")
+    saving.user(user_input)
     print('\n')
     while user_input.lower() != "exit":
         ai_response = chat_with_gpt(user_input)
         print(f"\n\033[0mInsomniaGPT: \033[1;95m {ai_response}")
+        saving.bot(ai_response)
         print('\n')
         user_input = input("\033[0mQuestion : ")
+        saving.user(user_input)
 except EOFError:
     exit()
 except KeyboardInterrupt:
