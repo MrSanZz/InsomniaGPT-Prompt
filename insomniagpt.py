@@ -179,6 +179,11 @@ def testapikey():
         i = input("Your New ApiKey ( OpenAI Api Key ): ")
         api_key = api_key.replace(api_key, i)
         apikey.save(api_key)
+    elif 'quota' in req.text:
+        print("\nApi Key Is Expired!.")
+        i = input("Your New ApiKey ( OpenAI Api Key ): ")
+        api_key = api_key.replace(api_key, i)
+        apikey.save(api_key)
     else:
         print('Your Api Key Is Valid, Enjoy!.')
     return api_key
